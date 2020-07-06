@@ -5,6 +5,7 @@
     method:'POST',
     data:{appName:appName,country:country,type:'popup'},
     success:function (data){
+      console.log(data)
       renderPopUp(data)
     }
    })
