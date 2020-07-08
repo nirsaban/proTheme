@@ -1,18 +1,38 @@
  window.onload = init;
+ 
  function init(){
+  $('#show-hidden-menu').click(function() {
+    $('.hidden-menu').slideToggle("slow");
+   
+  });
   $.ajax({
     url:'server/get_data.php',
     method:'POST',
     data:{appName:appName,country:country,type:'popup'},
     success:function (data){
-      console.log(data)
+     
       renderPopUp(data)
     }
    })
  }
+ function render_slider_bottom(data){
+  let dataArr = JSON.parse(data);
+  let links = document.querySelectorAll('.btn-light');
+  let imagesLider = document.querySelectorAll('.img_slider');
+  let titleSlider = document.querySelectorAll('#textUp')
+  let imgDef = ['cassino.jpg','image.jpg','image1','images2']
+  for(let i = 0; i < imagesLider.length; i++){
+    if(dataArr[i].appLogo.indexOf('http') == -1){
+      dataArr[i].appLogo = `assets/${imgDef[i]}`;
+      imagesLider[i].src = dataArr[i].appLogo;
+      }
+      links[i].href = dataArr[i].appLink;
+      imagesLider[i].src = dataArr[i].appLogo;
+      titleSlider[i].innerText = dataArr[i].appText_UP;  
+  }
+}
 function  renderPopUp(data){
   let dataArr = JSON.parse(data);
-  console.log(dataArr)
   imgPopUp.src = dataArr.appLogo;
   linkPopUp.href  = dataArr.appLink;
   namePopUp.innerText = dataArr.appText_UP
@@ -28,9 +48,10 @@ function  renderPopUp(data){
   setInterval(slide_img,1500)
   get_default_slags(appName,'default')
   
+  
 }
 function slide_message(){
-  let messageArr = ['10 users as corrently in this site','play now and take the money','the Best games in the world ','casino games'];
+  let messageArr = ['10 users as corrently in this site','play now and take the money','the Best games on the world ','casino games'];
   var itemMsg = messageArr[Math.floor(Math.random() * messageArr.length)];
   let message = document.getElementById('slider_message')
   message.textContent = itemMsg.toUpperCase();
@@ -46,6 +67,7 @@ function slide_message(){
    var itemImg = imgArr[Math.floor(Math.random() * imgArr.length)];
    let img = document.querySelector('.theme-image');
    img.src = `assets/${itemImg}`;
+   img.style.width = '100%';
   
  }
  function get_default_slags(appName,type){
@@ -54,11 +76,12 @@ function slide_message(){
       method:'POST',
       data:{appName:appName,country:country,type:type},
       success:function (data){
-        render_dom(data,type);
+        render_dom(data,type);   
       }
   })
  }
  function render_dom(data,type){
+  render_slider_bottom(data)
   const dataArr = JSON.parse(data);
  if(type === 'default'){
    render_default(dataArr,type)
@@ -105,7 +128,7 @@ function slide_message(){
                                st.innerHTML += '<div class="links">'+
                                '<div class="offer">SLOTS GAME'+
                                '</div>'+
-                               '<div class="btn btn-danger">PLAY NOW</div>'+
+                               `<a href = "${strip.appLink}" class="btn btn-danger">PLAY NOW</a>`+
                                '<a href="" class="read">Read Review</a>'+
                               '</div>'+
                                '</div>';
@@ -145,7 +168,7 @@ function slide_message(){
                              st.innerHTML += '<div class="links">'+
                              '<div class="offer">VIP'+
                              '</div>'+
-                             '<div class="btn btn-dark animVip">PLAY NOW</div>'+
+                             `<a href = "${strip.appLink}" class="btn btn-dark animVip">PLAY NOW</a>`+
                              '<a href="" class="read">Read Review</a>'+
                             '</div>'+
                              '</div>';
@@ -184,7 +207,7 @@ function slide_message(){
                              st.innerHTML += '<div class="links">'+
                              '<div class="offer">NEW OFFER'+
                              '</div>'+
-                             '<div class="btn btn-info">PLAY NOW</div>'+
+                             `<a href = "${strip.appLink}" class="btn btn-info">PLAY NOW</a>`+
                              '<a href="" class="read">Read Review</a>'+
                             '</div>'+
                              '</div>';
@@ -193,15 +216,14 @@ function slide_message(){
 })
  }
  function render_packages(dataArr,type){
-  
-   console.log(dataArr)
+  container_bottom.classList = ' none'
+  slotsContent.innerHTML = '';
+  vipContent.innerHTML = '';
+   defaultContent.innerHTML = '';
   packagesContent.innerHTML = '';
-  container_bottom.classList = 'none';
+  
   packagesContent.innerHTML += '<h2 class="packagesTitle">Best Packages</h2>';
   dataArr.map((package,key) =>{
-    if(key == 4){
-      packagesContent.removeAttribute("id");
-    }
     packagesContent.innerHTML += `<div class="container" >`+
     `<div class="card" id = contentP${key}>`+ 
     `<div class="card-body" >`+
@@ -223,7 +245,6 @@ function slide_message(){
    
  }
  function  render_top10(dataArr,type){
-  
   top10Content.innerHTML = ''
   container_bottom.classList = 'none'
   top10Content.innerHTML += '<h2 class="top10Title">Top 10 Games</h2>';
@@ -254,7 +275,7 @@ function slide_message(){
                                st.innerHTML += '<div class="links">'+
                                '<div class="offer">Top 10 Game'+
                                '</div>'+
-                               '<div class="btn btn-warning">PLAY NOW</div>'+
+                               `<a href = "${strip.appLink}" class="btn btn-warning">PLAY NOW</a>`+
                                '<a href="" class="read">Read Review</a>'+
                               '</div>'+
                                '</div>';
@@ -294,7 +315,7 @@ function slide_message(){
                                st.innerHTML += '<div class="links">'+
                                '<div class="offer">CASINO'+
                                '</div>'+
-                               '<div class="btn btn-primary">PLAY NOW</div>'+
+                               `<a href = "${strip.appLink}" class="btn btn-primary">PLAY NOW</a>`+
                                '<a href="" class="read">Read Review</a>'+
                               '</div>'+
                                '</div>';
@@ -304,14 +325,31 @@ function slide_message(){
  }
  
  function Featured(){
-  //  location.reload()
-  if(liOffers.classList == 'active'){
+ 
+    if(container_bottom.classList = 'none'){
+    container_bottom.removeAttribute('class') 
+   }
+    if(liOffers.classList == 'active'){
+      alert('offer')
     get_default_slags(appName,'offers')
-   }
-   if(container_bottom.classList = 'none'){
-    container_bottom.classList.remove("none");
-   }
+    }
+    if(liDefault.classList == 'active'){
+     
+      get_default_slags(appName,'default')
+      }
+      if(liSlots.classList == 'active'){
+        get_default_slags(appName,'slots')
+        }
+        if(liVip.classList == 'active'){
+          get_default_slags(appName,'vip')
+     }
+  
  }
+ 
 
 
 
+
+ $(document).ready(function() {
+  
+});

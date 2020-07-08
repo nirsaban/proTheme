@@ -9,8 +9,8 @@ $appName = $_GET['appName'] ;
 <head>
   <title>Pro theme</title>
   <meta charset="utf-8">
+ 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,9 +19,7 @@ $appName = $_GET['appName'] ;
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id ="slider_message">
-    
-  </div>
+  <div id ="slider_message"></div>
 <div class="con">
    <div class="top-nav">
     <ul class="nav nav-tabs">
@@ -49,10 +47,10 @@ $appName = $_GET['appName'] ;
   <div id="container_bottom">
     <div class="second-nav">
         <ul class="nav nav-tabs">
-           <li id="liDefault"><a  data-toggle="tab" href="#default" onclick="get_default_slags(appName,'default')"><i class="fa fa-star"></i><div class="contentTab">CASINO</div></a></li>
+           <li id="liDefault" class="active"><a  data-toggle="tab" href="#default" onclick="get_default_slags(appName,'default')"><i class="fa fa-star"></i><div class="contentTab">CASINO</div></a></li>
            <li id="liOffers"><a data-toggle="tab" href="#offers" onclick="get_default_slags(appName,'offers')"><i class="far fa-list-alt"></i><div class="contentTab">OFFERS</div> </a></li>
-           <li ><a data-toggle="tab" href="#vip" onclick="get_default_slags(appName,'vip')"><i class="far fa-heart"></i><div class="contentTab">VIP</div></a></li>
-           <li><a data-toggle="tab" href="#slots" onclick="get_default_slags(appName,'slots')"><i class="fas fa-gamepad"></i><div class="contentTab">SLOTS</div></a></li>
+           <li id="liVip"><a data-toggle="tab" href="#vip" onclick="get_default_slags(appName,'vip')"><i class="far fa-heart"></i><div class="contentTab">VIP</div></a></li>
+           <li id="liSlots"><a data-toggle="tab" href="#slots" onclick="get_default_slags(appName,'slots')"><i class="fas fa-gamepad"></i><div class="contentTab">SLOTS</div></a></li>
         </ul>
      </div>
      <div class="tab-content">
@@ -69,8 +67,67 @@ $appName = $_GET['appName'] ;
             <div class="strips" id="slotsContent"></div> 
             </div>    
       </div>
+
+     
+      <div id="slider_bottom">
+      <span id="openColse" ><div class="text">show more games</div><i id="show-hidden-menu" class="fas fa-sort-up arrow"></i></span>
+          <div class="hidden-menu" style="display: none;" id="slider_slugs">
+          <div class="slide">
+            <div class="card">
+            <img class="img_slider card-img-top" src="" alt="Photo of sunset">
+            <div class="card-body">
+            <h3 id="textUp" class="card-title"></h3>
+            <a href="#" class="btn btn-light">PLAY NOW</a>
+            </div>
+            </div>    
+          </div>
+          <div class="slide">
+            <div class="card">
+            <img class="img_slider card-img-top" src="" alt="Photo of sunset">
+            <div class="card-body">
+            <h3 id="textUp" class="card-title"></h3>
+            <a href="#" class="btn btn-light">PLAY NOW</a>
+            </div>
+            </div>    
+          </div>
+          <div class="slide">
+            <div class="card">
+            <img class="img_slider card-img-top" src="" alt="Photo of sunset">
+            <div class="card-body">
+            <h3 id="textUp" class="card-title"></h3>
+            <a href="#" class="btn btn-light">PLAY NOW</a>
+            </div>
+            </div>    
+          </div>
+          <div class="slide">
+            <div class="card">
+            <img class="img_slider card-img-top" src="" alt="Photo of sunset">
+            <div class="card-body">
+            <h3 id="textUp" class="card-title"></h3>
+            <a href="#" class="btn btn-light">PLAY NOW</a>
+            </div>
+            </div>    
+          </div>
+          <div class="slide">
+            <div class="card">
+            <img class="img_slider card-img-top" src="" alt="Photo of sunset">
+            <div class="card-body">
+            <h3 id="textUp" class="card-title"></h3>
+            <a href="#" class="btn btn-light">PLAY NOW</a>
+            </div>
+            </div>    
+          </div>
+          <!-- <div class="slide"><div class="card"><h5 id="textUp"></h5><img class="img_slider" src="" alt="Photo of sunset"></div></div>
+          <div class="slide"><div class="card"><h5 id="textUp"></h5><img class="img_slider" src="" alt="Photo of sunset"></div></div>
+          <div class="slide"><div class="card"><h5 id="textUp"></h5><img class="img_slider" src="" alt="Photo of sunset"></div></div> -->
+
+          </div>
+     
+       </div>
 </div>
+
 </div>
+
 <div class="modal fade" id="overlay">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -93,8 +150,11 @@ $appName = $_GET['appName'] ;
         </div>
       </div>
     </div>
+
   </div>
+ 
 </div>
+
 <script>
 const appName = '<?= $appName;?>';
 const country = '<?= $country;?>';
