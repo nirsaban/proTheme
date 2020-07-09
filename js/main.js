@@ -9,9 +9,9 @@
     url:'server/get_data.php',
     method:'POST',
     data:{appName:appName,country:country,type:'popup'},
-    success:function (data){
-     
-      renderPopUp(data)
+    success:function (data){    
+       renderPopUp(data)
+       render_slider_bottom(data)
     }
    })
  }
@@ -33,9 +33,9 @@
 }
 function  renderPopUp(data){
   let dataArr = JSON.parse(data);
-  imgPopUp.src = dataArr.appLogo;
-  linkPopUp.href  = dataArr.appLink;
-  namePopUp.innerText = dataArr.appText_UP
+  imgPopUp.src = dataArr[2].appLogo;
+  linkPopUp.href  = dataArr[2].appLink;
+  namePopUp.innerText = dataArr[2].appText_UP
   for(let i = 0; i < 6 ; i++){
     rate.innerHTML += '<i class="fa fa-star"></i>'
   }
@@ -81,7 +81,7 @@ function slide_message(){
   })
  }
  function render_dom(data,type){
-  render_slider_bottom(data)
+ 
   const dataArr = JSON.parse(data);
  if(type === 'default'){
    render_default(dataArr,type)

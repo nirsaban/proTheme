@@ -69,7 +69,11 @@ $appName = $_GET['appName'] ;
       </div>
 
      
-      <div id="slider_bottom">
+
+</div>
+
+</div>
+<div id="slider_bottom">
       <span id="openColse" ><div class="text">show more games</div><i id="show-hidden-menu" class="fas fa-sort-up arrow"></i></span>
           <div class="hidden-menu" style="display: none;" id="slider_slugs">
           <div class="slide">
@@ -124,10 +128,6 @@ $appName = $_GET['appName'] ;
           </div>
      
        </div>
-</div>
-
-</div>
-
 <div class="modal fade" id="overlay">
   <div class="modal-dialog">
     <div class="modal-content">

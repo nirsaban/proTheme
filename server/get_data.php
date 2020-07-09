@@ -44,9 +44,8 @@ function get_slug_data($slugsArr){
                 $data =   json_encode($sliceData);
                 print_r($data);die;
             }if($_POST['type'] == 'popup'){
-                 $popUpArr =  array_shift(array_slice($result, 2, 3));
-                $data = json_encode($popUpArr);
-                print_r($data);die;
+                 $data = json_encode($result);
+                 print_r($data);die;
                 }
             $data = json_encode($result);
             print_r($data);
